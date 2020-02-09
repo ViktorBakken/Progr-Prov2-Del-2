@@ -14,9 +14,10 @@ namespace Progr_prov_del_2
             int nummerOfCars = 0;
             int checkedCars = 0;
             List<Car> cars = new List<Car>();
+            List<int> unCheckedCars = new List<int>();
             bool wantToPlay = true;
 
-            Console.WriteLine("welcom to border patrol! You will be checking passing cars fpro contrabands!\nPress Enter");
+            Console.WriteLine("welcom to border patrol! You will be checking passing cars for contrabands!\nPress Enter");
             Console.ReadLine();
 
             while (wantToPlay)
@@ -24,12 +25,14 @@ namespace Progr_prov_del_2
                 nummerOfCars = rand.Next(1, 10);
                 cars = CreateCars(nummerOfCars, rand, cars);
 
-                Klasser.WriteLine("Day " + day.ToString() + "\nYou will check " + nummerOfCars + " cars today!", false);
+                Klasser.WriteLine("Day " + day.ToString() + "\n You will check " + nummerOfCars + " cars today!", false);
 
                 while (CheckIfAllCarsAreChecked(cars))
                 {
+                    PrintUnchecked(cars);
+
                     int math = nummerOfCars - checkedCars;
-                    Console.WriteLine("Which car do you want to check? There are " + math.ToString() + "left out of " + nummerOfCars + "!" );
+                    Console.WriteLine("Which car do you want to check? There are " + math.ToString() + " left out of " + nummerOfCars + "!");
 
                     string car = Console.ReadLine();
                     int chosenCar = Klasser.IsInt(car, "That is not a number or not an available number!", true, nummerOfCars);
@@ -74,7 +77,6 @@ namespace Progr_prov_del_2
             }
             return false;
         }
-
         static void PlayerChoiceMenu(int chosenCar, List<Car> cars, int checkedCars)
         {
             Console.Clear();
@@ -102,8 +104,15 @@ namespace Progr_prov_del_2
             }
             checkedCars++;
         }
+        static void PrintUnchecked(List<Car> cars)
+        {
+            for (int i = 0; i < cars.Count; i++)
+            {
+                if (true)
+                {
 
-
-
+                }
+            }
+        }
     }
 }
