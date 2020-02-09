@@ -14,6 +14,10 @@ namespace Progr_prov_del_2
             int nummerOfCars = 0;
             int checkedCars = 0;
             List<Car> cars = new List<Car>();
+            List<Car> resetCars = new List<Car>()
+            {
+
+            };
             List<int> unCheckedCars = new List<int>();
             bool wantToPlay = true;
 
@@ -35,18 +39,22 @@ namespace Progr_prov_del_2
                     Console.WriteLine("Which car do you want to check? There are " + math.ToString() + " left out of " + nummerOfCars + "!");
 
                     string car = Console.ReadLine();
-                    int chosenCar = Klasser.IsInt(car, "That is not a number or not an available number!", true, nummerOfCars);
+                    int chosenCar = Klasser.IsInt(car, "That is not a number or not an available number!", true, nummerOfCars) - 1;
+
                     while (cars[chosenCar].AlreadyChecked.Equals(true))
                     {
-                        Console.WriteLine("You havealready checked that car!");
+                        Console.WriteLine("You have already checked that car!");
+                        car = Console.ReadLine();
                         chosenCar = Klasser.IsInt(car, "That is not a number or not an available number!", true, nummerOfCars);
                     }
-                    PlayerChoiceMenu(chosenCar, cars, checkedCars);
+                    checkedCars = PlayerChoiceMenu(chosenCar, cars, checkedCars);
+                    Console.Clear();
                 }
+                cars = resetCars;
                 day++;
             }
-
         }
+
         static List<Car> CreateCars(int nummerOfCars, Random rand, List<Car> cars)
         {
             for (int i = 0; i < nummerOfCars; i++)
@@ -77,18 +85,23 @@ namespace Progr_prov_del_2
             }
             return false;
         }
-        static void PlayerChoiceMenu(int chosenCar, List<Car> cars, int checkedCars)
+        static int PlayerChoiceMenu(int chosenCar, List<Car> cars, int checkedCars)
         {
             Console.Clear();
             string[] choices = { "check", "let go" };
+
             Console.WriteLine("Do you want to check or let the car go?\nCheck or Let Go");
+
             string playerChoice = Console.ReadLine();
-            Klasser.IsTrueString(choices, playerChoice, "That is not an availalble choice!");
+
+            playerChoice = Klasser.IsTrueString(choices, playerChoice, "That is not an availalble choice!");
+
             bool foundContraband;
 
             if (playerChoice == choices[0])
             {
                 foundContraband = cars[chosenCar].Examine();
+
                 if (foundContraband.Equals(true))
                 {
                     Klasser.WriteLine("There was a hidden contraband in the car!\nPress Enter", false);
@@ -100,19 +113,25 @@ namespace Progr_prov_del_2
             }
             else
             {
+                cars[chosenCar].AlreadyChecked = true;
                 Klasser.WriteLine("You decided to trust the driver!", false);
             }
-            checkedCars++;
+            return checkedCars++;
         }
         static void PrintUnchecked(List<Car> cars)
         {
             for (int i = 0; i < cars.Count; i++)
             {
-                if (true)
+                if (cars[i].AlreadyChecked.Equals(false))
                 {
-
+                    Console.WriteLine(i + 1 + " Is unchecked");
+                }
+                if (cars[i].AlreadyChecked.Equals(true))
+                {
+                    Console.WriteLine(i + 1 + " have benn checked");
                 }
             }
         }
+
     }
 }

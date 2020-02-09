@@ -22,7 +22,7 @@ class Klasser
                 while (isInt == false)
                 {
                     WriteLine(errorMessage, false);
-                    Console.ReadLine().Trim();
+                    intake = Console.ReadLine().Trim();
                     isInt = int.TryParse(intake, out amount);
                 }
             }
@@ -31,7 +31,7 @@ class Klasser
         while (isInt == false)
         {
             WriteLine(errorMessage, false);
-            Console.ReadLine().Trim();
+            intake = Console.ReadLine().Trim();
             isInt = int.TryParse(intake, out amount);
         }
 
@@ -79,7 +79,7 @@ class Klasser
         return total[retVal];
     } //Slumpar en string från en string array
 
-    public static void IsTrueString(string[] correct, string choice, string felMedelande)
+    public static string IsTrueString(string[] correct, string choice, string felMedelande)
     {
         bool x = true;
         while (x.Equals(true))
@@ -99,6 +99,7 @@ class Klasser
                 choice = Console.ReadLine();
             }
         }
+        return choice;
     }
 
     public static string IsTrueStringSpecial(string choice, bool noEmptySpace, string felMedellande)

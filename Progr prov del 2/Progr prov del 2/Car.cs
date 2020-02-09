@@ -17,6 +17,10 @@ namespace Progr_prov_del_2
             {
                 return alreadyChecked;
             }
+            set
+            {
+                alreadyChecked = value;
+            }
         }
         public bool Examine()
         {
