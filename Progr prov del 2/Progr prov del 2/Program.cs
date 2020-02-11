@@ -5,8 +5,6 @@ namespace Progr_prov_del_2
 {
     class Program
     {
-
-
         static void Main(string[] args)
         {
             Random rand = new Random();
@@ -132,6 +130,5 @@ namespace Progr_prov_del_2
                 }
             }
         }
-
     }
 }
